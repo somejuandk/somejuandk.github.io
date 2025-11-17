@@ -107,6 +107,13 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const themeColors = getThemeColors();
         const labels = data.map(d => d.month);
+        
+        // New colors based on user request
+        const isDarkMode = document.documentElement.classList.contains('dark');
+        const subtleGreen = isDarkMode ? 'rgba(16, 185, 129, 0.8)' : 'rgba(74, 222, 128, 0.8)';
+        const subtleRed = isDarkMode ? 'rgba(239, 68, 68, 0.8)' : 'rgba(248, 113, 113, 0.8)';
+        const lineBlue = isDarkMode ? 'rgba(96, 165, 250, 1)' : 'rgba(59, 130, 246, 1)';
+        const lineBlueRgba = isDarkMode ? 'rgba(96, 165, 250, 0.25)' : 'rgba(59, 130, 246, 0.25)';
 
         const datalabelsPlugin = {
           id: 'customDatalabels',
@@ -163,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     {
                         label: 'Incremental reach',
                         data: data.map(d => d.incremental),
-                        backgroundColor: themeColors.primary,
+                        backgroundColor: subtleGreen,
                         stack: 'reachStack',
                         order: 2,
                         borderRadius: 6,
@@ -172,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     {
                         label: 'Normal reach',
                         data: data.map(d => d.normalReach),
-                        backgroundColor: themeColors.secondary,
+                        backgroundColor: subtleRed,
                         stack: 'reachStack',
                         order: 3,
                         borderRadius: 6,
@@ -181,8 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     {
                         label: '%',
                         data: data.map(d => d.percentageNew),
-                        borderColor: themeColors.danger,
-                        backgroundColor: themeColors.dangerRgba,
+                        borderColor: lineBlue,
+                        backgroundColor: lineBlueRgba,
                         type: 'line',
                         order: 1,
                         yAxisID: 'y1',
