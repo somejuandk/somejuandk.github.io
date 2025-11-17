@@ -18,13 +18,14 @@
     <script src="Analyzer Module/analyzer-graph-analysis.js" defer></script>
     <script src="Analyzer Module/analyzer-granulation.js" defer></script>
     <script src="backendcorr.js" defer></script>
-    <script src="percentage.js" defer></script>
+    <script src="Tools Module/percentage.js" defer></script>
     <script src="budgetpacer.js" defer></script>
-    <script src="schreiber.js" defer></script>
+    <script src="Tools Module/schreiber.js" defer></script>
     <script src="simulator.js" defer></script>
     <script src="incremental-reach.js" defer></script>
     <script src="roas-goal-setter.js" defer></script>
     <script src="pitch-assistant.js" defer></script>
+    <script src="Tools Module/tools.js" defer></script>
 <link rel="stylesheet" href="/index.css">
 </head>
 <body class="text-gray-800">
@@ -43,6 +44,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path></svg>
                     <span>Performance Analyzer</span>
                 </a>
+                <a href="#" data-app="tools">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 0 1 .801 0l3.744 3.744a.563.563 0 0 1 0 .801l-2.471 2.471m0 0-.566.566a2.25 2.25 0 0 1-3.182 0l-1.485-1.485A2.25 2.25 0 0 1 6.5 13.5v-1.5a.563.563 0 0 1 .563-.563h1.5a2.25 2.25 0 0 1 2.25 2.25v5.877a2.652 2.652 0 0 0-2.652-2.652h-1.5a.563.563 0 0 0-.563.563v1.5a2.25 2.25 0 0 0 2.25 2.25h1.5m-3-9.477A2.25 2.25 0 0 1 8 3.75v-1.5a.563.563 0 0 1 .563-.563h1.5a2.25 2.25 0 0 1 2.25 2.25v1.5" /></svg>
+                    <span>Tools</span>
+                </a>
                 <a href="#" data-app="backend-correlations">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
                     <span>Backend Correlations</span>
@@ -51,17 +56,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 11l19-9-9 19-2-8-8-2z" /></svg>
                     <span>ROAS Goal Setter</span>
                 </a>
-                <a href="#" data-app="percentage">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m-15 0a3 3 0 110-6 3 3 0 010 6zM19.5 19.5a3 3 0 110-6 3 3 0 010 6z" /></svg>
-                    <span>Percentage Calculator</span>
-                </a>
                 <a href="#" data-app="budget-pacer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                     <span>Budget Pacer</span>
-                </a>
-                <a href="#" data-app="schreiber">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.153.34c-1.325 0-2.56-.219-3.723-.632m3.723-.632l-2.62-10.726m5.24 10.092c-1.01-.143-2.01-.317-3-.52m0 0l-2.62 10.726m-5.24-10.092L3.75 4.97m0 0A48.416 48.416 0 0112 4.5c2.291 0 4.545.16 6.75.47M3.75 4.97c-1.01.143-2.01.317-3 .52m3-.52L.63 15.698c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.153.34c1.325 0 2.56-.219 3.723-.632m-3.723-.632l2.62-10.726" /></svg>
-                    <span>Schreiber</span>
                 </a>
                 <a href="#" data-app="simulator">
                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22.5l-.648-1.938a3.375 3.375 0 00-2.684-2.684L11.25 18l1.938-.648a3.375 3.375 0 002.684-2.684L16.25 13.5l.648 1.938a3.375 3.375 0 002.684 2.684L21.75 18l-1.938.648a3.375 3.375 0 00-2.684 2.684z"></path></svg>
@@ -132,6 +129,11 @@
                         <span class="text-xl font-semibold card-title">Performance Analyzer</span>
                         <p class="mt-3 text-sm card-description leading-relaxed">Analyze ad spend data, simulate budgets, and uncover key performance correlations to optimize your campaigns.</p>
                     </a>
+                    <a href="#" data-app="tools" class="app-card group glass-container flex flex-col items-center justify-center p-12 rounded-2xl text-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mb-4 card-icon transition-all duration-300 group-hover:scale-105"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 0 1 .801 0l3.744 3.744a.563.563 0 0 1 0 .801l-2.471 2.471m0 0-.566.566a2.25 2.25 0 0 1-3.182 0l-1.485-1.485A2.25 2.25 0 0 1 6.5 13.5v-1.5a.563.563 0 0 1 .563-.563h1.5a2.25 2.25 0 0 1 2.25 2.25v5.877a2.652 2.652 0 0 0-2.652-2.652h-1.5a.563.563 0 0 0-.563.563v1.5a2.25 2.25 0 0 0 2.25 2.25h1.5m-3-9.477A2.25 2.25 0 0 1 8 3.75v-1.5a.563.563 0 0 1 .563-.563h1.5a2.25 2.25 0 0 1 2.25 2.25v1.5" /></svg>
+                        <span class="text-xl font-semibold card-title">Tools</span>
+                        <p class="mt-3 text-sm card-description leading-relaxed">A collection of useful utilities for calculations and conversions.</p>
+                    </a>
                     <a href="#" data-app="backend-correlations" class="app-card group glass-container flex flex-col items-center justify-center p-12 rounded-2xl text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mb-4 card-icon transition-all duration-300 group-hover:scale-105"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>
                         <span class="text-xl font-semibold card-title">Backend Correlations</span>
@@ -142,20 +144,10 @@
                         <span class="text-xl font-semibold card-title">ROAS Goal Setter</span>
                         <p class="mt-3 text-sm card-description leading-relaxed">Set ROAS goals, calculate max CPA/CPC, and understand profitability drivers.</p>
                     </a>
-                    <a href="#" data-app="percentage" class="app-card group glass-container flex flex-col items-center justify-center p-12 rounded-2xl text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mb-4 card-icon transition-all duration-300 group-hover:scale-105"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m-15 0a3 3 0 110-6 3 3 0 010 6zM19.5 19.5a3 3 0 110-6 3 3 0 010 6z" /></svg>
-                        <span class="text-xl font-semibold card-title">Percentage Calculator</span>
-                        <p class="mt-3 text-sm card-description leading-relaxed">Quickly solve common percentage problems and calculations.</p>
-                    </a>
                     <a href="#" data-app="budget-pacer" class="app-card group glass-container flex flex-col items-center justify-center p-12 rounded-2xl text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mb-4 card-icon transition-all duration-300 group-hover:scale-105"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                         <span class="text-xl font-semibold card-title">Budget Pacer</span>
                         <p class="mt-3 text-sm card-description leading-relaxed">Track and project your monthly ad spend to stay on budget.</p>
-                    </a>
-                    <a href="#" data-app="schreiber" class="app-card group glass-container flex flex-col items-center justify-center p-12 rounded-2xl text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mb-4 card-icon transition-all duration-300 group-hover:scale-105"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.153.34c-1.325 0-2.56-.219-3.723-.632m3.723-.632l-2.62-10.726m5.24 10.092c-1.01-.143-2.01-.317-3-.52m0 0l-2.62 10.726m-5.24-10.092L3.75 4.97m0 0A48.416 48.416 0 0112 4.5c2.291 0 4.545.16 6.75.47M3.75 4.97c-1.01.143-2.01.317-3 .52m3-.52L.63 15.698c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.153.34c1.325 0 2.56-.219 3.723-.632m-3.723-.632l2.62-10.726" /></svg>
-                        <span class="text-xl font-semibold card-title">Schreiber</span>
-                        <p class="mt-3 text-sm card-description leading-relaxed">An app specifically made as per request from Søren Skriver</p>
                     </a>
                     <a href="#" data-app="simulator" class="app-card group glass-container flex flex-col items-center justify-center p-12 rounded-2xl text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 mb-4 card-icon transition-all duration-300 group-hover:scale-105"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.562L16.25 22.5l-.648-1.938a3.375 3.375 0 00-2.684-2.684L11.25 18l1.938-.648a3.375 3.375 0 002.684-2.684L16.25 13.5l.648 1.938a3.375 3.375 0 002.684 2.684L21.75 18l-1.938.648a3.375 3.375 0 00-2.684 2.684z"></path></svg>
@@ -266,6 +258,33 @@
                 </main>
             </div>
 
+            <div id="tools-view" class="main-view is-inactive relative">
+                <main id="tools-main-content">
+                    <header class="mb-8 flex justify-between items-start">
+                        <p class="text-gray-600">A collection of useful utilities.</p>
+                        <button class="back-to-dashboard-btn flex items-center text-sm font-medium bg-white text-[#5248e2] border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-100 transition-colors shadow-sm">
+                           <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" transform="scale(-1, 1) translate(-24, 0)"></path></svg>
+                           Back to app overview
+                        </button>
+                    </header>
+            
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <button id="time-day-converter-btn" class="w-full text-left block p-6 glass-container rounded-xl hover:bg-white/80 dark:hover:bg-gray-900/80 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                             <span class="font-bold text-slate-800 text-lg">Time & Day Converter</span>
+                             <span class="block text-sm status-text text-purple-ready mt-1">Ready to use</span>
+                         </button>
+                         <button id="percentage-calculator-btn" class="w-full text-left block p-6 glass-container rounded-xl hover:bg-white/80 dark:hover:bg-gray-900/80 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <span class="font-bold text-slate-800 text-lg">Percentage Calculator</span>
+                            <span class="block text-sm status-text text-purple-ready mt-1">Ready to use</span>
+                        </button>
+                        <button id="schreiber-tool-btn" class="w-full text-left block p-6 glass-container rounded-xl hover:bg-white/80 dark:hover:bg-gray-900/80 transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                            <span class="font-bold text-slate-800 text-lg">Schreiber Tool</span>
+                            <span class="block text-sm status-text text-purple-ready mt-1">Ready to use</span>
+                        </button>
+                    </div>
+                </main>
+            </div>
+
             <div id="backend-correlations-view" class="main-view is-inactive">
                 <header class="mb-8 flex justify-between items-center">
                     <p class="text-gray-600 mt-1">Upload Shopify, Meta, and Google data to find performance correlations.</p>
@@ -346,9 +365,6 @@
                         <div id="backend-correlations-period-select-container">
                             <!-- Dropdown will be injected here by script.js -->
                         </div>
-                        <div id="backend-correlations-country-select-container">
-                            <!-- Country dropdown will be injected here by script.js -->
-                        </div>
                     </div>
                 </div>
                 <div id="backend-correlations-results" class="hidden mt-8">
@@ -391,13 +407,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Country Breakdown Section -->
-                                <div id="country-breakdown-container" class="hidden">
-                                    <h4 class="text-md font-semibold text-gray-800 mb-3 mt-2">Country Breakdown</h4>
-                                    <div id="country-correlations-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                        <!-- Country-specific correlations will be injected here -->
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div id="backend-correlation-charts-container" class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6" style="height: 400px;">
@@ -405,71 +414,6 @@
                             <div><canvas id="backend-metric-chart"></canvas></div>
                         </div>
                         <div id="backend-correlation-table-container" class="mt-8">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="percentage-view" class="main-view is-inactive">
-                <header class="mb-8 flex justify-between items-center">
-                    <p class="text-gray-600 mt-1">A simple tool for common percentage calculations.</p>
-                    <button class="back-to-dashboard-btn flex items-center text-sm font-medium bg-white text-[#5248e2] border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-100 transition-colors shadow-sm">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" transform="scale(-1, 1) translate(-24, 0)"></path></svg>
-                        Back to app overview
-                    </button>
-                </header>
-            
-                <div class="glass-container p-6 rounded-xl">
-                    <!-- Navigation Buttons -->
-                    <div class="flex justify-center items-center gap-4 mb-8">
-                        <button data-tab="percent-of" class="percentage-tab active">What is X% of Y?</button>
-                        <button data-tab="is-what-percent" class="percentage-tab">X is what % of Y?</button>
-                        <button data-tab="percent-change" class="percentage-tab">Percentage Change</button>
-                    </div>
-            
-                    <!-- Tab contents -->
-                    <div>
-                        <!-- What is X% of Y -->
-                        <div id="percent-of-tab" class="percentage-tab-content space-y-4">
-                            <div class="flex flex-wrap items-center gap-4 text-lg">
-                                <span>What is</span>
-                                <input type="number" id="percent-of-x" class="styled-input rounded-full p-2 w-32 text-center" placeholder="X">
-                                <span>% of</span>
-                                <input type="number" id="percent-of-y" class="styled-input rounded-full p-2 w-32 text-center" placeholder="Y">
-                                <span>?</span>
-                            </div>
-                            <div class="mt-4 p-4 bg-gray-100/30 rounded-lg text-center">
-                                <p class="text-sm text-gray-600">Result</p>
-                                <p id="percent-of-result" class="text-5xl font-bold text-gray-900 mt-2">-</p>
-                            </div>
-                        </div>
-            
-                        <!-- X is what percent of Y -->
-                        <div id="is-what-percent-tab" class="percentage-tab-content hidden space-y-4">
-                            <div class="flex flex-wrap items-center gap-4 text-lg">
-                                <input type="number" id="is-what-x" class="styled-input rounded-full p-2 w-32 text-center" placeholder="X">
-                                <span>is what percent of</span>
-                                <input type="number" id="is-what-y" class="styled-input rounded-full p-2 w-32 text-center" placeholder="Y">
-                                <span>?</span>
-                            </div>
-                            <div class="mt-4 p-4 bg-gray-100/30 rounded-lg text-center">
-                                <p class="text-sm text-gray-600">Result</p>
-                                <p id="is-what-result" class="text-5xl font-bold text-gray-900 mt-2">-</p>
-                            </div>
-                        </div>
-            
-                        <!-- What is the percentage change -->
-                        <div id="percent-change-tab" class="percentage-tab-content hidden space-y-4">
-                            <div class="flex flex-wrap items-center gap-4 text-lg">
-                                <span>Percentage change from</span>
-                                <input type="number" id="change-from-x" class="styled-input rounded-full p-2 w-32 text-center" placeholder="X">
-                                <span>to</span>
-                                <input type="number" id="change-to-y" class="styled-input rounded-full p-2 w-32 text-center" placeholder="Y">
-                            </div>
-                            <div class="mt-4 p-4 bg-gray-100/30 rounded-lg text-center">
-                                <p class="text-sm text-gray-600">Result</p>
-                                <p id="change-result" class="text-5xl font-bold text-gray-900 mt-2">-</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -528,52 +472,6 @@
                             </svg>
                             Campaign Pacing
                         </button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="schreiber-view" class="main-view is-inactive">
-                <header class="mb-8 flex justify-between items-center">
-                    <p class="text-gray-600 mt-1">A simple tool for budget allocation between Meta and Google.</p>
-                    <button class="back-to-dashboard-btn flex items-center text-sm font-medium bg-white text-[#5248e2] border border-gray-300 rounded-full px-4 py-2 hover:bg-gray-100 transition-colors shadow-sm">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" transform="scale(-1, 1) translate(-24, 0)"></path></svg>
-                        Back to app overview
-                    </button>
-                </header>
-                <div class="glass-container max-w-2xl mx-auto p-6 rounded-xl">
-                     <div class="space-y-6">
-                        <div>
-                            <label for="schreiber-total-budget" class="block text-sm font-medium text-gray-600">Total Budget (DKK)</label>
-                            <input type="number" id="schreiber-total-budget" class="styled-input mt-1 block w-full rounded-full p-2" placeholder="e.g., 100000">
-                        </div>
-                        <div class="space-y-4">
-                             <div>
-                                <label for="schreiber-meta-percentage" class="block text-sm font-medium text-gray-600 flex justify-between">
-                                    <span>Meta Percentage</span>
-                                    <span id="schreiber-meta-value">50%</span>
-                                </label>
-                                <input type="range" id="schreiber-meta-percentage" min="0" max="100" value="50" class="styled-range w-full mt-2">
-                            </div>
-                            <div>
-                                <label for="schreiber-google-percentage" class="block text-sm font-medium text-gray-600 flex justify-between">
-                                    <span>Google Percentage</span>
-                                    <span id="schreiber-google-value">50%</span>
-                                </label>
-                                <input type="range" id="schreiber-google-percentage" min="0" max="100" value="50" class="styled-range w-full mt-2">
-                            </div>
-                        </div>
-                         <div class="border-t border-gray-200/50 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div id="schreiber-meta-result" class="summary-card text-center">
-                                 <p class="text-sm text-gray-600">Meta Spend Allocation</p>
-                                 <p class="text-2xl font-bold text-gray-900 mt-1">DKK 0.00</p>
-                                 <p class="text-xs text-gray-500 mt-1">DKK 0.00 / day</p>
-                            </div>
-                             <div id="schreiber-google-result" class="summary-card text-center">
-                                 <p class="text-sm text-gray-600">Google Spend Allocation</p>
-                                 <p class="text-2xl font-bold text-gray-900 mt-1">DKK 0.00</p>
-                                 <p class="text-xs text-gray-500 mt-1">DKK 0.00 / day</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1319,30 +1217,156 @@
             </div>
         </div>
     </div>
+    <div id="time-day-converter-modal" class="fixed inset-0 z-40 hidden items-center justify-center p-4">
+        <div id="time-day-converter-backdrop" class="fixed inset-0 bg-gray-900 bg-opacity-30 modal-backdrop"></div>
+        <div class="glass-container relative rounded-xl shadow-xl w-full max-w-3xl p-6 modal-content">
+            <div class="flex justify-between items-center border-b border-[#c8d2fe] pb-3 mb-6">
+                <h3 class="text-xl font-semibold text-gray-900">Calculate Duration Between Two Dates</h3>
+                <button id="time-day-converter-close-btn" class="text-gray-500 hover:text-gray-800 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200/50 transition-colors">&times;</button>
+            </div>
+            
+            <div class="space-y-4">
+                <div>
+                    <label for="tools-start-date" class="block text-sm font-medium text-gray-600">Start Date</label>
+                    <input type="date" id="tools-start-date" class="styled-input mt-1 block w-full rounded-full p-2">
+                </div>
+                <div>
+                    <label for="tools-end-date" class="block text-sm font-medium text-gray-600">End Date</label>
+                    <input type="date" id="tools-end-date" class="styled-input mt-1 block w-full rounded-full p-2">
+                </div>
+            </div>
+            <div class="mt-4">
+                <label class="flex items-center cursor-pointer">
+                    <input type="checkbox" id="tools-include-end-date" class="custom-checkbox mr-2">
+                    <span class="text-sm text-gray-600">Include end date in calculation (1 day is added)</span>
+                </label>
+            </div>
+    
+            <div id="tools-result-container" class="mt-8 p-6 bg-gray-100/30 rounded-lg text-center hidden">
+                <p class="text-sm text-gray-600">Result</p>
+                <p id="tools-result-days" class="text-5xl font-bold text-gray-900 mt-2">-</p>
+                <p id="tools-result-detailed" class="text-lg text-gray-700 mt-2">-</p>
+            </div>
+        </div>
+    </div>
+    <div id="percentage-calculator-modal" class="fixed inset-0 z-40 hidden items-center justify-center p-4">
+        <div id="percentage-calculator-backdrop" class="fixed inset-0 bg-gray-900 bg-opacity-30 modal-backdrop"></div>
+        <div class="glass-container relative rounded-xl shadow-xl w-full max-w-3xl p-6 modal-content">
+            <div class="flex justify-between items-center border-b border-[#c8d2fe] pb-3 mb-6">
+                <h3 class="text-xl font-semibold text-gray-900">Percentage Calculator</h3>
+                <button id="percentage-calculator-close-btn" class="text-gray-500 hover:text-gray-800 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200/50 transition-colors">&times;</button>
+            </div>
+            <div>
+                <!-- Navigation Buttons -->
+                <div class="flex justify-center items-center gap-4 mb-8">
+                    <button data-tab="percent-of" class="percentage-tab active">What is X% of Y?</button>
+                    <button data-tab="is-what-percent" class="percentage-tab">X is what % of Y?</button>
+                    <button data-tab="percent-change" class="percentage-tab">Percentage Change</button>
+                </div>
+        
+                <!-- Tab contents -->
+                <div>
+                    <!-- What is X% of Y -->
+                    <div id="percent-of-tab" class="percentage-tab-content space-y-4">
+                        <div class="flex flex-wrap items-center gap-4 text-lg">
+                            <span>What is</span>
+                            <input type="number" id="percent-of-x" class="styled-input rounded-full p-2 w-32 text-center" placeholder="X">
+                            <span>% of</span>
+                            <input type="number" id="percent-of-y" class="styled-input rounded-full p-2 w-32 text-center" placeholder="Y">
+                            <span>?</span>
+                        </div>
+                        <div class="mt-4 p-4 bg-gray-100/30 rounded-lg text-center">
+                            <p class="text-sm text-gray-600">Result</p>
+                            <p id="percent-of-result" class="text-5xl font-bold text-gray-900 mt-2">-</p>
+                        </div>
+                    </div>
+        
+                    <!-- X is what percent of Y -->
+                    <div id="is-what-percent-tab" class="percentage-tab-content hidden space-y-4">
+                        <div class="flex flex-wrap items-center gap-4 text-lg">
+                            <input type="number" id="is-what-x" class="styled-input rounded-full p-2 w-32 text-center" placeholder="X">
+                            <span>is what percent of</span>
+                            <input type="number" id="is-what-y" class="styled-input rounded-full p-2 w-32 text-center" placeholder="Y">
+                            <span>?</span>
+                        </div>
+                        <div class="mt-4 p-4 bg-gray-100/30 rounded-lg text-center">
+                            <p class="text-sm text-gray-600">Result</p>
+                            <p id="is-what-result" class="text-5xl font-bold text-gray-900 mt-2">-</p>
+                        </div>
+                    </div>
+        
+                    <!-- What is the percentage change -->
+                    <div id="percent-change-tab" class="percentage-tab-content hidden space-y-4">
+                        <div class="flex flex-wrap items-center gap-4 text-lg">
+                            <span>Percentage change from</span>
+                            <input type="number" id="change-from-x" class="styled-input rounded-full p-2 w-32 text-center" placeholder="X">
+                            <span>to</span>
+                            <input type="number" id="change-to-y" class="styled-input rounded-full p-2 w-32 text-center" placeholder="Y">
+                        </div>
+                        <div class="mt-4 p-4 bg-gray-100/30 rounded-lg text-center">
+                            <p class="text-sm text-gray-600">Result</p>
+                            <p id="change-result" class="text-5xl font-bold text-gray-900 mt-2">-</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="schreiber-tool-modal" class="fixed inset-0 z-40 hidden items-center justify-center p-4">
+        <div id="schreiber-tool-backdrop" class="fixed inset-0 bg-gray-900 bg-opacity-30 modal-backdrop"></div>
+        <div class="glass-container relative rounded-xl shadow-xl w-full max-w-2xl p-6 modal-content">
+             <div class="flex justify-between items-center border-b border-[#c8d2fe] pb-3 mb-6">
+                <h3 class="text-xl font-semibold text-gray-900">Schreiber Tool</h3>
+                <button id="schreiber-tool-close-btn" class="text-gray-500 hover:text-gray-800 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-200/50 transition-colors">&times;</button>
+            </div>
+            <div class="space-y-6">
+                <div>
+                    <label for="schreiber-total-budget" class="block text-sm font-medium text-gray-600">Total Budget (DKK)</label>
+                    <input type="number" id="schreiber-total-budget" class="styled-input mt-1 block w-full rounded-full p-2" placeholder="e.g., 100000">
+                </div>
+                <div class="space-y-4">
+                     <div>
+                        <label for="schreiber-meta-percentage" class="block text-sm font-medium text-gray-600 flex justify-between">
+                            <span>Meta Percentage</span>
+                            <span id="schreiber-meta-value">50%</span>
+                        </label>
+                        <input type="range" id="schreiber-meta-percentage" min="0" max="100" value="50" class="styled-range w-full mt-2">
+                    </div>
+                    <div>
+                        <label for="schreiber-google-percentage" class="block text-sm font-medium text-gray-600 flex justify-between">
+                            <span>Google Percentage</span>
+                            <span id="schreiber-google-value">50%</span>
+                        </label>
+                        <input type="range" id="schreiber-google-percentage" min="0" max="100" value="50" class="styled-range w-full mt-2">
+                    </div>
+                </div>
+                 <div class="border-t border-gray-200/50 pt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div id="schreiber-meta-result" class="summary-card text-center">
+                         <p class="text-sm text-gray-600">Meta Spend Allocation</p>
+                         <p class="text-2xl font-bold text-gray-900 mt-1">DKK 0.00</p>
+                         <p class="text-xs text-gray-500 mt-1">DKK 0.00 / day</p>
+                    </div>
+                     <div id="schreiber-google-result" class="summary-card text-center">
+                         <p class="text-sm text-gray-600">Google Spend Allocation</p>
+                         <p class="text-2xl font-bold text-gray-900 mt-1">DKK 0.00</p>
+                         <p class="text-xs text-gray-500 mt-1">DKK 0.00 / day</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="tooltip" role="tooltip" class="hidden absolute z-50 inline-block px-3 py-2 text-sm font-medium text-gray-800 bg-white rounded-xl shadow-lg border border-gray-200 transition-opacity duration-300 pointer-events-none max-w-xs"></div>
     
     <div id="top-bar" class="fixed bottom-0 left-0 w-full z-50 glass-container rounded-t-xl text-sm">
         <div class="max-w-7xl mx-auto px-8 py-3 flex justify-between items-center relative">
             <div id="top-bar-notification" class="absolute left-1/2 bottom-full mb-3 py-2 px-5 rounded-full text-sm font-semibold shadow-lg opacity-0 pointer-events-none"></div>
             <div class="flex items-center gap-3">
-                <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 595.48 116.37" class="h-8 w-auto">
-                    <defs>
-                        <style>
-                            .cls-1 {
-                                fill: #fff;
-                                stroke-width: 0px;
-                            }
-                        </style>
-                    </defs>
-                    <path class="cls-1" d="M103.75,58.18c0,34.79-20.78,58.19-52.03,58.19S0,92.97,0,58.18,20.47,0,51.87,0s51.87,23.55,51.87,58.18ZM20.01,58.18c0,25.4,12.47,42.64,31.71,42.64s32.02-18.16,32.02-42.64-12.16-42.64-31.86-42.64-31.86,17.39-31.86,42.64Z"/>
-                    <path class="cls-1" d="M159.3,115.6c-9.85,0-18.78-4.15-24.47-12v10.47h-17.24V2.31h18.47v41.56c6-7.85,14.31-10.77,23.55-10.77,20.32,0,33.1,15.7,33.1,41.1s-13.86,41.4-33.4,41.4ZM154.53,47.26c-11.7,0-18.93,10.93-18.93,26.94s7.54,27.09,19.24,27.09,18.93-10.47,18.93-27.09-7.08-26.94-19.24-26.94Z"/>
-                    <path class="cls-1" d="M236.72,102.98c8.78,0,14.47-3.7,14.47-9.85,0-8.01-8.77-10.01-19.09-12.47-13.54-3.23-29.55-6.77-29.55-24.17,0-14.47,12.78-24.01,33.09-24.01s32.94,9.08,32.94,26.47h-18.32c-.46-9.39-5.23-13.24-15.24-13.24-8.16,0-13.39,3.54-13.39,9.24,0,8.47,11.7,10.62,23.55,13.55,12.47,3.39,25.09,7.85,25.09,23.09s-12.93,24.63-33.71,24.63c-22.63,0-35.25-9.55-35.71-27.55h18.93c0,9.55,5.69,14.32,16.93,14.32Z"/>
-                    <path class="cls-1" d="M301.21,20.93h-18.47V2.31h18.47v18.63ZM301.21,114.06h-18.47V34.63h18.47v79.42Z"/>
-                    <path class="cls-1" d="M347.99,33.09c9.7,0,17.85,3.08,23.24,10.62V2.31h18.47v111.75h-17.39v-10.62c-5.54,7.85-14.47,12.16-24.32,12.16-20.32,0-33.55-15.08-33.55-41.4s13.24-41.1,33.55-41.1ZM352.3,101.28c11.7,0,19.24-10.01,19.24-27.09s-7.24-26.94-18.93-26.94-19.09,10.31-19.09,26.94,7.08,27.09,18.78,27.09Z"/>
-                    <path class="cls-1" d="M426.33,20.93h-18.47V2.31h18.47v18.63ZM426.33,114.06h-18.47V34.63h18.47v79.42Z"/>
-                    <path class="cls-1" d="M493.28,103.75c-6.62,8-14.16,11.85-26.63,11.85-17.7,0-27.55-8.77-27.55-23.55,0-25.4,31.86-25.55,52.02-28.01v-3.39c0-9.85-4.62-15.08-14.47-15.08s-15.55,4.77-15.7,13.39h-18.93c.61-16.62,13.85-26.47,34.63-26.47,25.24,0,32.48,13.08,32.48,34.48v22.16c0,8.77.31,16.32,1.69,24.93h-16.78c-.46-3.08-.62-6.16-.77-10.31ZM458.19,91.74c0,6.77,4.62,11.08,13.24,11.08,11.54,0,19.7-5.54,19.7-22.78v-3.39c-13.85,2-32.94,1.54-32.94,15.09Z"/>
-                    <path class="cls-1" d="M568.39,33.09c11.7,0,18.16,4.16,22.32,10.93,3.7,6.16,4.77,14.62,4.77,24.47v45.56h-18.47v-44.33c0-11.85-1.69-22.47-14.47-22.47-11.7,0-18.01,7.69-18.01,26.63v40.17h-18.47V34.63h17.08v10.31c6.31-8.46,16.01-11.85,25.25-11.85Z"/>
+                <svg class="w-6 h-6 text-[#5248e2]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L2 8.5V15.5L12 22L22 15.5V8.5L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M2 8.5L12 12L22 8.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                    <path d="M12 22V12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
                 </svg>
+                <span class="font-bold text-xl text-gray-800 font-rock">Late Night Commit</span>
             </div>
             
             <div class="absolute left-1/2 -translate-x-1/2 flex items-center gap-4">
