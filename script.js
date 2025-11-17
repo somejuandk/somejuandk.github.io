@@ -26,7 +26,6 @@
         let backendCorrelationMetricChart = null;
         let unfilteredAlignedBackendData = [], alignedBackendData = [];
         let backendCorrelationPeriodType = 'all';
-        let selectedCountryFilter = 'all';
         let currentMetricDetail = null;
 
         let notificationTimeout;
@@ -45,21 +44,17 @@
                 title: 'Performance Analyzer',
                 icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5248e2] shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"></path></svg>`
             },
+            'tools': {
+                title: 'Tools',
+                icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5248e2] shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 0 1 .801 0l3.744 3.744a.563.563 0 0 1 0 .801l-2.471 2.471m0 0-.566.566a2.25 2.25 0 0 1-3.182 0l-1.485-1.485A2.25 2.25 0 0 1 6.5 13.5v-1.5a.563.563 0 0 1 .563-.563h1.5a2.25 2.25 0 0 1 2.25 2.25v5.877a2.652 2.652 0 0 0-2.652-2.652h-1.5a.563.563 0 0 0-.563.563v1.5a2.25 2.25 0 0 0 2.25 2.25h1.5m-3-9.477A2.25 2.25 0 0 1 8 3.75v-1.5a.563.563 0 0 1 .563-.563h1.5a2.25 2.25 0 0 1 2.25 2.25v1.5" /></svg>`
+            },
             'backend-correlations': {
                 title: 'Backend Correlations',
                 icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5248e2] shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" /></svg>`
             },
-            'percentage': {
-                title: 'Percentage Calculator',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5248e2] shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m-15 0a3 3 0 110-6 3 3 0 010 6zM19.5 19.5a3 3 0 110-6 3 3 0 010 6z"></path></svg>`
-            },
             'budget-pacer': {
                 title: 'Budget Pacer',
                 icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5248e2] shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`
-            },
-            'schreiber': {
-                title: 'Schreiber',
-                icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-[#5248e2] shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.153.34c-1.325 0-2.56-.219-3.723-.632m3.723-.632l-2.62-10.726m5.24 10.092c-1.01-.143-2.01-.317-3-.52m0 0l-2.62 10.726m-5.24-10.092L3.75 4.97m0 0A48.416 48.416 0 0112 4.5c2.291 0 4.545.16 6.75.47M3.75 4.97c-1.01.143-2.01.317-3 .52m3-.52L.63 15.698c-.122.499.106 1.028.589 1.202a5.989 5.989 0 002.153.34c1.325 0 2.56-.219 3.723-.632m-3.723-.632l2.62-10.726" /></svg>`
             },
             'simulator': {
                 title: 'Performance Simulator',
@@ -122,6 +117,13 @@
                 graphAnalysisBtn: document.getElementById('graph-analysis-btn'),
                 granulateBtn: document.getElementById('granulate-btn'),
             },
+            tools: {
+                view: document.getElementById('tools-view'),
+                mainContent: document.getElementById('tools-main-content'),
+                timeDayConverterBtn: document.getElementById('time-day-converter-btn'),
+                percentageCalculatorBtn: document.getElementById('percentage-calculator-btn'),
+                schreiberToolBtn: document.getElementById('schreiber-tool-btn'),
+            },
             backendCorrelations: {
                 view: document.getElementById('backend-correlations-view'),
                 shopifyDropZone: document.getElementById('shopify-drop-zone'),
@@ -150,14 +152,8 @@
                 metricChartCanvas: document.getElementById('backend-metric-chart'),
                 tableContainer: document.getElementById('backend-correlation-table-container'),
             },
-            percentage: {
-                view: document.getElementById('percentage-view'),
-            },
              budgetPacer: {
                 view: document.getElementById('budget-pacer-view'),
-            },
-            schreiber: {
-                view: document.getElementById('schreiber-view'),
             },
             simulator: {
                 view: document.getElementById('simulator-view'),
@@ -261,6 +257,21 @@
                 list: document.getElementById('file-library-list'),
                 useBtn: document.getElementById('use-file-btn'),
                 btn: document.getElementById('file-library-btn')
+            },
+            timeDayConverterModal: {
+                modal: document.getElementById('time-day-converter-modal'),
+                backdrop: document.getElementById('time-day-converter-backdrop'),
+                closeBtn: document.getElementById('time-day-converter-close-btn'),
+            },
+            percentageCalculatorModal: {
+                modal: document.getElementById('percentage-calculator-modal'),
+                backdrop: document.getElementById('percentage-calculator-backdrop'),
+                closeBtn: document.getElementById('percentage-calculator-close-btn'),
+            },
+            schreiberToolModal: {
+                modal: document.getElementById('schreiber-tool-modal'),
+                backdrop: document.getElementById('schreiber-tool-backdrop'),
+                closeBtn: document.getElementById('schreiber-tool-close-btn'),
             },
         };
 
@@ -536,63 +547,39 @@
         // --- Core Application Logic ---
         function showDashboardView() {
             // Hide all app views
-            DOM.analyzer.view.classList.add('is-inactive');
-            DOM.backendCorrelations.view.classList.add('is-inactive');
-            DOM.percentage.view.classList.add('is-inactive');
-            DOM.budgetPacer.view.classList.add('is-inactive');
-            DOM.schreiber.view.classList.add('is-inactive');
-            DOM.simulator.view.classList.add('is-inactive');
-            DOM.incrementalReach.view.classList.add('is-inactive');
-            DOM.roasGoalSetter.view.classList.add('is-inactive');
-            DOM.pitchAssistant.view.classList.add('is-inactive');
+            document.querySelectorAll('.main-view').forEach(view => view.classList.add('is-inactive'));
             
             // Show dashboard
             DOM.dashboardView.classList.remove('is-inactive');
             updateHeader('dashboard');
 
-            // Reset analyzer layout when going back to dashboard
+            // Reset specific app layouts
             DOM.analyzer.sidebar.classList.remove('visible');
+            DOM.analyzer.mainContent.style.transform = 'translateX(0)';
         }
         
         function switchApp(appName) {
             // Hide all main views
-            DOM.dashboardView.classList.add('is-inactive');
-            DOM.analyzer.view.classList.add('is-inactive');
-            DOM.backendCorrelations.view.classList.add('is-inactive');
-            DOM.percentage.view.classList.add('is-inactive');
-            DOM.budgetPacer.view.classList.add('is-inactive');
-            DOM.schreiber.view.classList.add('is-inactive');
-            DOM.simulator.view.classList.add('is-inactive');
-            DOM.incrementalReach.view.classList.add('is-inactive');
-            DOM.roasGoalSetter.view.classList.add('is-inactive');
-            DOM.pitchAssistant.view.classList.add('is-inactive');
+            document.querySelectorAll('.main-view').forEach(view => view.classList.add('is-inactive'));
 
-            // Reset analyzer layout by default when switching apps
+            // Reset specific app layouts by default
             DOM.analyzer.sidebar.classList.remove('visible');
+            DOM.analyzer.mainContent.style.transform = 'translateX(0)';
+            DOM.tools.mainContent.style.marginRight = '0';
 
             // Update header for new app
             updateHeader(appName);
 
             // Show the selected app's main view
+            const view = document.getElementById(`${appName}-view`);
+            if (view) {
+                view.classList.remove('is-inactive');
+            }
+
+            // Apply specific layouts
             if (appName === 'analyzer') {
-                DOM.analyzer.view.classList.remove('is-inactive');
                 DOM.analyzer.sidebar.classList.add('visible');
-            } else if (appName === 'backend-correlations') {
-                DOM.backendCorrelations.view.classList.remove('is-inactive');
-            } else if (appName === 'percentage') {
-                DOM.percentage.view.classList.remove('is-inactive');
-            } else if (appName === 'budget-pacer') {
-                DOM.budgetPacer.view.classList.remove('is-inactive');
-            } else if (appName === 'schreiber') {
-                DOM.schreiber.view.classList.remove('is-inactive');
-            } else if (appName === 'simulator') {
-                DOM.simulator.view.classList.remove('is-inactive');
-            } else if (appName === 'incremental-reach') {
-                DOM.incrementalReach.view.classList.remove('is-inactive');
-            } else if (appName === 'roas-goal-setter') {
-                DOM.roasGoalSetter.view.classList.remove('is-inactive');
-            } else if (appName === 'pitch-assistant') {
-                DOM.pitchAssistant.view.classList.remove('is-inactive');
+                DOM.analyzer.mainContent.style.transform = `translateX(21rem)`;
             }
 
             // Update app switcher button styles
@@ -661,6 +648,49 @@
             let dense = sqrt((pow1 - pow(sum1, 2) / n) * (pow2 - pow(sum2, 2) / n));
             if (dense === 0) return 0;
             return (mulSum - (sum1 * sum2 / n)) / dense;
+        }
+
+        // --- New Modal Functions ---
+        function showTimeDayConverterModal() {
+            DOM.timeDayConverterModal.modal.classList.replace('hidden', 'flex');
+            setTimeout(() => {
+                DOM.timeDayConverterModal.backdrop.classList.add('open');
+                DOM.timeDayConverterModal.modal.querySelector('.modal-content').classList.add('open');
+            }, 10);
+        }
+
+        function hideTimeDayConverterModal() {
+            DOM.timeDayConverterModal.backdrop.classList.remove('open');
+            DOM.timeDayConverterModal.modal.querySelector('.modal-content').classList.remove('open');
+            setTimeout(() => DOM.timeDayConverterModal.modal.classList.replace('flex', 'hidden'), 300);
+        }
+
+        function showPercentageCalculatorModal() {
+            DOM.percentageCalculatorModal.modal.classList.replace('hidden', 'flex');
+            setTimeout(() => {
+                DOM.percentageCalculatorModal.backdrop.classList.add('open');
+                DOM.percentageCalculatorModal.modal.querySelector('.modal-content').classList.add('open');
+            }, 10);
+        }
+
+        function hidePercentageCalculatorModal() {
+            DOM.percentageCalculatorModal.backdrop.classList.remove('open');
+            DOM.percentageCalculatorModal.modal.querySelector('.modal-content').classList.remove('open');
+            setTimeout(() => DOM.percentageCalculatorModal.modal.classList.replace('flex', 'hidden'), 300);
+        }
+
+        function showSchreiberModal() {
+            DOM.schreiberToolModal.modal.classList.replace('hidden', 'flex');
+            setTimeout(() => {
+                DOM.schreiberToolModal.backdrop.classList.add('open');
+                DOM.schreiberToolModal.modal.querySelector('.modal-content').classList.add('open');
+            }, 10);
+        }
+
+        function hideSchreiberModal() {
+            DOM.schreiberToolModal.backdrop.classList.remove('open');
+            DOM.schreiberToolModal.modal.querySelector('.modal-content').classList.remove('open');
+            setTimeout(() => DOM.schreiberToolModal.modal.classList.replace('flex', 'hidden'), 300);
         }
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -784,10 +814,10 @@
                 dropZoneEl.addEventListener('dragover', (e) => { e.preventDefault(); e.stopPropagation(); dropZoneEl.classList.add('dragover'); });
                 dropZoneEl.addEventListener('dragleave', (e) => { e.preventDefault(); e.stopPropagation(); dropZoneEl.classList.remove('dragover'); });
                 dropZoneEl.addEventListener('drop', (e) => {
-                     e.preventDefault();
-                     e.stopPropagation();
-                     dropZoneEl.classList.remove('dragover');
-                     if (e.dataTransfer.files.length > 0) handleCorrelationFile(e.dataTransfer.files[0], type);
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZoneEl.classList.remove('dragover');
+                    if (e.dataTransfer.files.length > 0) handleCorrelationFile(e.dataTransfer.files[0], type);
                 });
             };
 
@@ -795,9 +825,7 @@
             setupDropZone(DOM.backendCorrelations.metaDropZone, DOM.backendCorrelations.metaFileInput, 'meta');
             setupDropZone(DOM.backendCorrelations.googleDropZone, DOM.backendCorrelations.googleFileInput, 'google');
 
-            DOM.backendCorrelations.metricSelect.addEventListener('change', renderBackendCorrelationCharts);
-
-            DOM.backendCorrelations.periodTypeControls.addEventListener('click', e => {
+            DOM.backendCorrelations.periodTypeControls.addEventListener('click', (e) => {
                 const button = e.target.closest('button');
                 if (button && !button.classList.contains('active')) {
                     DOM.backendCorrelations.periodTypeControls.querySelector('.active').classList.remove('active');
@@ -807,143 +835,161 @@
                 }
             });
 
+            DOM.backendCorrelations.metricSelect.addEventListener('change', renderBackendCorrelationCharts);
 
+            // Analyzer sidebar button listeners
+            DOM.analyzer.correlationsBtn.addEventListener('click', showCorrelationsModal);
+            DOM.analyzer.simulationBtn.addEventListener('click', showSimulationModal);
+            DOM.analyzer.bestWorstBtn.addEventListener('click', showBestWorstModal);
+            DOM.analyzer.graphAnalysisBtn.addEventListener('click', showGraphAnalysisModal);
+            DOM.analyzer.granulateBtn.addEventListener('click', showGranulateModal);
+
+            // Analyzer Dashboard Listeners
             DOM.analyzerDashboard.timeAggControls.addEventListener('click', (e) => {
-                if(e.target.tagName === 'BUTTON') {
+                const button = e.target.closest('button');
+                if (button && !button.classList.contains('active')) {
                     DOM.analyzerDashboard.timeAggControls.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    analyzerDashboardTimeAggregation = e.target.dataset.period;
+                    button.classList.add('active');
+                    analyzerDashboardTimeAggregation = button.dataset.period;
                     renderAnalyzerDashboard();
                 }
             });
 
             DOM.analyzerDashboard.top5MetricSelect.addEventListener('change', renderAnalyzerTop5Table);
-            
+
+            // Correlations Modal Listeners
             DOM.correlationsModal.metric1Select.addEventListener('change', calculateAndRenderCorrelation);
             DOM.correlationsModal.metric2Select.addEventListener('change', calculateAndRenderCorrelation);
             DOM.correlationsModal.timeAggControls.addEventListener('click', (e) => {
-                if(e.target.tagName === 'BUTTON') {
+                const button = e.target.closest('button');
+                if (button && !button.classList.contains('active')) {
                     DOM.correlationsModal.timeAggControls.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    correlationTimeAggregation = e.target.dataset.period;
+                    button.classList.add('active');
+                    correlationTimeAggregation = button.dataset.period;
                     calculateAndRenderCorrelation();
                 }
             });
 
+            // Simulation Modal Listeners
             DOM.simulationModal.spendSlider.addEventListener('input', throttle(runSimulation, 150));
             DOM.simulationModal.timeAggControls.addEventListener('click', (e) => {
-                if(e.target.tagName === 'BUTTON') {
+                const button = e.target.closest('button');
+                if (button && !button.classList.contains('active')) {
                     DOM.simulationModal.timeAggControls.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    simulationTimeAggregation = e.target.dataset.period;
+                    button.classList.add('active');
+                    simulationTimeAggregation = button.dataset.period;
                     runSimulation();
                 }
             });
 
+            // Best/Worst Modal Listeners
             DOM.bestWorstModal.metricSelect.addEventListener('change', runAndRenderBestWorstAnalysis);
             DOM.bestWorstModal.timeAggControls.addEventListener('click', (e) => {
-                 if(e.target.tagName === 'BUTTON') {
+                const button = e.target.closest('button');
+                if (button && !button.classList.contains('active')) {
                     DOM.bestWorstModal.timeAggControls.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    bestWorstTimeAggregation = e.target.dataset.period;
+                    button.classList.add('active');
+                    bestWorstTimeAggregation = button.dataset.period;
                     runAndRenderBestWorstAnalysis();
                 }
             });
 
+            // Granulation Modal Listeners
             DOM.granulateModal.modeToggle.addEventListener('click', (e) => {
                 const button = e.target.closest('button');
-                if (!button || button.classList.contains('active')) return;
-                
-                DOM.granulateModal.modeToggle.querySelector('.active').classList.remove('active');
-                button.classList.add('active');
-                granulationMode = button.dataset.mode;
-            
-                renderGranulateSelectors();
-                renderGranulationTable();
-            });
-            DOM.granulateModal.resultsContainer.addEventListener('click', (e) => {
-                const icon = e.target.closest('.magnify-icon');
-                if (icon) {
-                    const metric = icon.dataset.metric;
-                    showMetricChartModal(metric);
+                if (button && !button.classList.contains('active')) {
+                    DOM.granulateModal.modeToggle.querySelector('.active').classList.remove('active');
+                    button.classList.add('active');
+                    granulationMode = button.dataset.mode;
+                    renderGranulateSelectors();
+                    renderGranulationTable();
                 }
             });
 
+            DOM.granulateModal.resultsContainer.addEventListener('click', e => {
+                const magnifyIcon = e.target.closest('.magnify-icon');
+                if(magnifyIcon) {
+                    showMetricChartModal(magnifyIcon.dataset.metric);
+                }
+            });
+
+             // Metric Chart Modal Listeners
             DOM.metricChartModal.closeBtn.addEventListener('click', hideMetricChartModal);
             DOM.metricChartModal.backdrop.addEventListener('click', hideMetricChartModal);
-            
+
+
+            // Graph Analysis Modal Listeners
             DOM.graphAnalysisModal.timeAggControls.addEventListener('click', (e) => {
-                if(e.target.tagName === 'BUTTON') {
+                const button = e.target.closest('button');
+                if (button && !button.classList.contains('active')) {
                     DOM.graphAnalysisModal.timeAggControls.querySelector('.active').classList.remove('active');
-                    e.target.classList.add('active');
-                    graphAnalysisTimeAggregation = e.target.dataset.period;
+                    button.classList.add('active');
+                    graphAnalysisTimeAggregation = button.dataset.period;
                     renderAllAnalysisGraphs();
                 }
             });
             DOM.graphAnalysisModal.grid.addEventListener('click', e => {
-                const target = e.target;
-                if (target.classList.contains('enlarge-chart-btn') || target.closest('.enlarge-chart-btn')) {
-                    const button = target.closest('.enlarge-chart-btn');
-                    showEnlargedChart(button.dataset.chartId);
-                } else if (target.parentElement.classList.contains('chart-type-toggle')) {
-                    const chartId = target.dataset.chartId;
-                    const chartType = target.dataset.chartType;
-                    if(chartId && chartType && graphAnalysisChartTypes[chartId] !== chartType) {
-                        graphAnalysisChartTypes[chartId] = chartType;
-                        target.parentElement.querySelector('.active').classList.remove('active');
-                        target.classList.add('active');
-                        rerenderSingleAnalysisGraph(chartId);
-                    }
+                 const chartTypeBtn = e.target.closest('.chart-type-toggle button');
+                 if (chartTypeBtn && !chartTypeBtn.classList.contains('active')) {
+                    const chartId = chartTypeBtn.dataset.chartId;
+                    const chartType = chartTypeBtn.dataset.chartType;
+                    const toggle = chartTypeBtn.closest('.chart-type-toggle');
+                    toggle.querySelector('.active').classList.remove('active');
+                    chartTypeBtn.classList.add('active');
+                    graphAnalysisChartTypes[chartId] = chartType;
+                    rerenderSingleAnalysisGraph(chartId); // Rerender with new type
+                 }
+                const enlargeBtn = e.target.closest('.enlarge-chart-btn');
+                if(enlargeBtn) {
+                    showEnlargedChart(enlargeBtn.dataset.chartId);
                 }
             });
 
+            // Enlarged Chart Modal Listeners
             DOM.enlargeChartModal.closeBtn.addEventListener('click', hideEnlargedChart);
             DOM.enlargeChartModal.backdrop.addEventListener('click', hideEnlargedChart);
-            
+
+
+            // Tools App Listeners
+            DOM.tools.timeDayConverterBtn.addEventListener('click', showTimeDayConverterModal);
+            DOM.timeDayConverterModal.closeBtn.addEventListener('click', hideTimeDayConverterModal);
+            DOM.timeDayConverterModal.backdrop.addEventListener('click', hideTimeDayConverterModal);
+
+            DOM.tools.percentageCalculatorBtn.addEventListener('click', showPercentageCalculatorModal);
+            DOM.percentageCalculatorModal.closeBtn.addEventListener('click', hidePercentageCalculatorModal);
+            DOM.percentageCalculatorModal.backdrop.addEventListener('click', hidePercentageCalculatorModal);
+
+            DOM.tools.schreiberToolBtn.addEventListener('click', showSchreiberModal);
+            DOM.schreiberToolModal.closeBtn.addEventListener('click', hideSchreiberModal);
+            DOM.schreiberToolModal.backdrop.addEventListener('click', hideSchreiberModal);
+
+            // File Library Listeners
             DOM.fileLibraryModal.btn.addEventListener('click', openFileLibraryModal);
             DOM.fileLibraryModal.closeBtn.addEventListener('click', closeFileLibraryModal);
             DOM.fileLibraryModal.backdrop.addEventListener('click', closeFileLibraryModal);
             DOM.fileLibraryModal.list.addEventListener('click', handleFileLibrarySelection);
             DOM.fileLibraryModal.useBtn.addEventListener('click', useSelectedFile);
 
-            // Dark Mode
-            const initialTheme = localStorage.getItem('theme');
-            if (initialTheme === 'light') {
-                document.documentElement.classList.remove('dark');
-                DOM.darkModeCheckbox.checked = false;
-            } else { // Default to dark mode
-                document.documentElement.classList.add('dark');
-                DOM.darkModeCheckbox.checked = true;
-            }
 
-            DOM.darkModeToggle.addEventListener('click', () => {
-                const isDarkMode = DOM.darkModeCheckbox.checked;
-                document.documentElement.classList.toggle('dark', isDarkMode);
-                localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
-                showNotification(`Dark Mode ${isDarkMode ? 'enabled' : 'disabled'}.`, 'info');
-                rerenderAllVisibleCharts();
+            // --- Dark Mode & Screenshot Mode Toggles ---
+            DOM.darkModeCheckbox.addEventListener('change', (e) => {
+                document.documentElement.classList.toggle('dark', e.target.checked);
+                localStorage.setItem('darkMode', e.target.checked);
+                 rerenderAllVisibleCharts();
             });
 
-            // Screenshot Mode
-            const initialScreenshotMode = localStorage.getItem('screenshotMode');
-            if (initialScreenshotMode === 'true') {
-                document.body.classList.add('screenshot-mode');
-                if (DOM.screenshotModeCheckbox) DOM.screenshotModeCheckbox.checked = true;
-            } else {
-                document.body.classList.remove('screenshot-mode');
-                if (DOM.screenshotModeCheckbox) DOM.screenshotModeCheckbox.checked = false;
+            // Check for saved dark mode preference
+            if (localStorage.getItem('darkMode') === 'true') {
+                DOM.darkModeCheckbox.checked = true;
+                document.documentElement.classList.add('dark');
             }
 
-            if(DOM.screenshotModeToggle) {
-                DOM.screenshotModeToggle.addEventListener('click', () => {
-                    const isScreenshotMode = DOM.screenshotModeCheckbox.checked;
-                    document.body.classList.toggle('screenshot-mode', isScreenshotMode);
-                    localStorage.setItem('screenshotMode', isScreenshotMode);
-                    showNotification(`Screenshot mode ${isScreenshotMode ? 'enabled' : 'disabled'}.`, 'info');
-                });
-            }
-
+            DOM.screenshotModeCheckbox.addEventListener('change', (e) => {
+                 document.body.classList.toggle('screenshot-mode', e.target.checked);
+            });
+            
+            // --- Final Setup ---
             setupTooltips();
-            setupVibecodedMessage();
             runStatusChecks();
+            setupVibecodedMessage();
         });
